@@ -69,25 +69,39 @@ class _QuizPageState extends State<QuizPage> {
                       print(uid);
                       var ob = DatabaseMethods();
                       var temp1 = await ob.getUserInfo(uid);
+                      var temp2;
 
-                      print(temp1);
+                      var newuser;
+                      final userDoc = await Firestore.instance
+                          .collection('users')
+                          .where('userEmail', isEqualTo: uid)
+                          .limit(1)
+                          .getDocuments();
+
+                      if (userDoc.documents.length != 0) {
+                        newuser = userDoc.documents[0];
+                      }
+
+                      temp2 = newuser.data['userName'];
+
+                      print(temp2);
 
                       dynamic abc = {
-                        'username': '$uid',
+                        'username': '$temp2',
                         'options': rorschach,
                       };
 
-                      // http.Response response = await http.post(
-                      //     "https://a2b8007a433f.ngrok.io/rtest/api/rtest/all",
-                      //     body: json.encode(abc),
-                      //     headers: {"Content-Type": "application/json"});
-                      // print(json.encode(abc));
+                      http.Response response = await http.post(
+                          "https://e094513681ab.ngrok.io/rtest/api/rtest/all",
+                          body: json.encode(abc),
+                          headers: {"Content-Type": "application/json"});
+                      print(json.encode(abc));
 
-                      // if (response.statusCode == 200) {
-                      //   print(response.body);
-                      // } else {
-                      //   print("error");
-                      // }
+                      if (response.statusCode == 200) {
+                        print(response.body);
+                      } else {
+                        print("error");
+                      }
 
                       Alert(
                               context: context,
