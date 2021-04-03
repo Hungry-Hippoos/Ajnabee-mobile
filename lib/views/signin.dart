@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             Text(
-              "DIscuss!",
+              "AJNABI!",
               style: TextStyle(fontFamily: "Roboto", letterSpacing: 2.5),
             )
           ],
@@ -138,7 +138,7 @@ class _SignInState extends State<SignIn> {
                               TextFormField(
                                 obscureText: true,
                                 validator: (val) {
-                                  return val.length > 6
+                                  return val.length >= 6
                                       ? null
                                       : "Enter Password 6+ characters";
                                 },

@@ -73,10 +73,10 @@ flutter:
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: fonts/GloriaHallelujah-Regular.ttf
+  # fonts:
+  #   - family: Roboto
+  #     fonts:
+  #       - asset: fonts/GloriaHallelujah-Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

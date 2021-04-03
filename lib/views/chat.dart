@@ -4,6 +4,8 @@ import 'package:memechat/services/database.dart';
 import 'package:memechat/widget/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Chat extends StatefulWidget {
   final String chatRoomId;
@@ -72,13 +74,13 @@ class _ChatState extends State<Chat> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.yellow, width: 2),
                   shape: BoxShape.circle,
-                  color: Colors.black),
+                  color: Colors.grey),
               child: Icon(
                 Icons.person,
                 size: 40,
@@ -91,8 +93,35 @@ class _ChatState extends State<Chat> {
               widget.userName,
               style: TextStyle(fontFamily: "Roboto", letterSpacing: 2.5),
             ),
-            SizedBox(
-              width: 15,
+            FlatButton(
+              onPressed: () async {
+                var list = [];
+                await Firestore.instance
+                    .collection("chatRoom")
+                    .document("${widget.chatRoomId}")
+                    .collection("chats")
+                    .orderBy('time')
+                    .getDocuments()
+                    .then((value) => {
+                          value.documents.forEach((f) {
+                            var t1 = f.data['message'];
+                            var t2 = f.data['sendBy'];
+                            var t3 = f.data['time'];
+                            list.add([t1, t2, t3]);
+                          })
+                        });
+
+                print(list);
+
+                dynamic request = {"data": list};
+
+                print(json.encode(request));
+              },
+              child: Icon(
+                Icons.account_box,
+                size: 40,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -109,7 +138,6 @@ class _ChatState extends State<Chat> {
       bottomNavigationBar: Container(
         width: MediaQuery.of(context).size.width,
         padding: MediaQuery.of(context).viewInsets,
-        color: Colors.black,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -120,7 +148,7 @@ class _ChatState extends State<Chat> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     border: new Border.all(
-                      color: Colors.white,
+                      color: Colors.black,
                       width: 1.0,
                     ),
                   ),
@@ -132,12 +160,13 @@ class _ChatState extends State<Chat> {
                     },
                     maxLines: 3,
                     minLines: 1,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.black),
                     controller: messageEditingController,
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                         hintText: "Type a message",
                         hintStyle: TextStyle(
-                          color: Colors.white60,
+                          color: Colors.black,
                           fontSize: 20,
                         ),
                         border: InputBorder.none),
@@ -152,18 +181,14 @@ class _ChatState extends State<Chat> {
               onTap: () {
                 addMessage();
               },
-              child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(40)),
-                  padding: EdgeInsets.all(12),
-                  child: Image.asset(
-                    "assets/images/send.png",
-                    height: 25,
-                    width: 25,
-                  )),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
+                child: Icon(
+                  Icons.message,
+                  color: Colors.black,
+                  size: 34,
+                ),
+              ),
             ),
           ],
         ),
