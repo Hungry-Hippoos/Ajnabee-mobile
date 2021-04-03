@@ -115,7 +115,17 @@ class _ChatState extends State<Chat> {
 
                 dynamic request = {"data": list};
 
+                http.Response response = await http.post(
+                    "https://2c0275413087.ngrok.io/rtest/api/message",
+                    body: json.encode(request),
+                    headers: {"Content-Type": "application/json"});
                 print(json.encode(request));
+
+                if (response.statusCode == 200) {
+                  print(response.body);
+                } else {
+                  print("error");
+                }
               },
               child: Icon(
                 Icons.account_box,
