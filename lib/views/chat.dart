@@ -100,87 +100,74 @@ class _ChatState extends State<Chat> {
         elevation: 0.0,
       ),
       body: Container(
-       
-        
         child: Stack(
           children: [
             chatMessages(),
           ],
         ),
       ),
-      bottomNavigationBar: 
-       
-         Container(
-    
-
-          width: MediaQuery.of(context).size.width,
-          padding: MediaQuery.of(context).viewInsets,
-          color: Colors.black,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: new Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                      ),
+      bottomNavigationBar: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: MediaQuery.of(context).viewInsets,
+        color: Colors.black,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    border: new Border.all(
+                      color: Colors.white,
+                      width: 1.0,
                     ),
-                    child: TextField(
-                      onTap: () {
-                        setState(() {
-                          _sc.jumpTo(_sc.position.maxScrollExtent);
-                        });
-                      },
-                      maxLines: 3,
-                      minLines: 1,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                      controller: messageEditingController,
-                      decoration: InputDecoration(
-                          hintText: "Type a message",
-                          hintStyle: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 20,
-                          ),
-                          border: InputBorder.none),
-                    ),
+                  ),
+                  child: TextField(
+                    onTap: () {
+                      setState(() {
+                        _sc.jumpTo(_sc.position.maxScrollExtent);
+                      });
+                    },
+                    maxLines: 3,
+                    minLines: 1,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    controller: messageEditingController,
+                    decoration: InputDecoration(
+                        hintText: "Type a message",
+                        hintStyle: TextStyle(
+                          color: Colors.white60,
+                          fontSize: 20,
+                        ),
+                        border: InputBorder.none),
                   ),
                 ),
               ),
-              SizedBox(
-                width: 16,
-              ),
-              GestureDetector(
-                onTap: () {
-                  addMessage();
-                },
-                child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              const Color(0x36FFFFFF),
-                              const Color(0x0FFFFFFF)
-                            ],
-                            begin: FractionalOffset.topLeft,
-                            end: FractionalOffset.bottomRight),
-                        borderRadius: BorderRadius.circular(40)),
-                    padding: EdgeInsets.all(12),
-                    child: Image.asset(
-                      "assets/images/send.png",
-                      height: 25,
-                      width: 25,
-                    )),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            GestureDetector(
+              onTap: () {
+                addMessage();
+              },
+              child: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(40)),
+                  padding: EdgeInsets.all(12),
+                  child: Image.asset(
+                    "assets/images/send.png",
+                    height: 25,
+                    width: 25,
+                  )),
+            ),
+          ],
         ),
-      
+      ),
     );
   }
 }
@@ -202,22 +189,17 @@ class MessageTile extends StatelessWidget {
             sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
         padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
         decoration: BoxDecoration(
-            borderRadius: sendByMe
-                ? BorderRadius.only(
-                    topLeft: Radius.circular(23),
-                    topRight: Radius.circular(23),
-                    bottomLeft: Radius.circular(23))
-                : BorderRadius.only(
-                    topLeft: Radius.circular(23),
-                    topRight: Radius.circular(23),
-                    bottomRight: Radius.circular(23)),
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  const Color(0xff808080),
-                  const Color(0xff070707),
-                ])),
+          borderRadius: sendByMe
+              ? BorderRadius.only(
+                  topLeft: Radius.circular(23),
+                  topRight: Radius.circular(23),
+                  bottomLeft: Radius.circular(23))
+              : BorderRadius.only(
+                  topLeft: Radius.circular(23),
+                  topRight: Radius.circular(23),
+                  bottomRight: Radius.circular(23)),
+          color: Colors.black,
+        ),
         child: Text(message,
             textAlign: TextAlign.start,
             style: TextStyle(

@@ -5,6 +5,9 @@ import 'package:memechat/views/chat.dart';
 import 'package:memechat/widget/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -86,7 +89,8 @@ class _SearchState extends State<Search> {
             ),
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Colors.white),
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.orange.shade200),
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,15 +171,8 @@ class _SearchState extends State<Search> {
                 child: Container(
                   height: 40,
                   width: 40,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [
-                            const Color(0x36FFFFFF),
-                            const Color(0x0FFFFFFF)
-                          ],
-                          begin: FractionalOffset.topLeft,
-                          end: FractionalOffset.bottomRight),
-                      borderRadius: BorderRadius.circular(50)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(50)),
                   padding: EdgeInsets.all(12),
                   child: Icon(
                     Icons.search,

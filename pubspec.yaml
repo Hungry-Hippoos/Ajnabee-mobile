@@ -33,6 +33,8 @@ dependencies:
   shared_preferences: ^0.5.7
   google_sign_in: 4.4.3
   random_string: ^2.0.1
+  rflutter_alert: ^1.1.0
+  http: ^0.12.0
 
 dev_dependencies:
   flutter_test:

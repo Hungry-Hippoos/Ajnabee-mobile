@@ -39,7 +39,7 @@ class _SignInState extends State<SignIn> {
           .signInWithEmailAndPassword(
               emailEditingController.text, passwordEditingController.text)
           .then((result) async {
-        if (result != null)  {
+        if (result != null) {
           QuerySnapshot userInfoSnapshot =
               await DatabaseMethods().getUserInfo(emailEditingController.text);
 
@@ -64,7 +64,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
+      appBar: AppBar(
         backgroundColor: Color(0xff36B6C5),
         title: Row(
           children: <Widget>[
@@ -98,148 +98,151 @@ class _SignInState extends State<SignIn> {
               child: Center(child: CircularProgressIndicator()),
             )
           : SafeArea(
-                      child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/images/loginBack.jpg"),
-              fit: BoxFit.cover,
-            ),),
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 50.0),
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/usergreen.jpg"),
-                  radius: 50,
-                ),
-                SizedBox(height: 30,),
-                      
-                      Form(
-                        key: formKey,
-                        child: Column(
+              child: SingleChildScrollView(
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/loginBack.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 50.0),
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/images/usergreen.jpg"),
+                          radius: 50,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                validator: (val) {
+                                  return RegExp(
+                                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                          .hasMatch(val)
+                                      ? null
+                                      : "Please Enter Correct Email";
+                                },
+                                controller: emailEditingController,
+                                style: simpleTextStyle(),
+                                decoration: textFieldInputDecoration("email"),
+                              ),
+                              TextFormField(
+                                obscureText: true,
+                                validator: (val) {
+                                  return val.length > 6
+                                      ? null
+                                      : "Enter Password 6+ characters";
+                                },
+                                style: simpleTextStyle(),
+                                controller: passwordEditingController,
+                                decoration:
+                                    textFieldInputDecoration("password"),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            TextFormField(
-                              validator: (val) {
-                                return RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(val)
-                                    ? null
-                                    : "Please Enter Correct Email";
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ForgotPassword()));
                               },
-                              controller: emailEditingController,
-                              style: simpleTextStyle(),
-                              decoration: textFieldInputDecoration("email"),
+                              child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Text(
+                                    "Forgot Password?",
+                                    style: simpleTextStyle(),
+                                  )),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            signIn();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.white),
+                            width: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Login",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                              textAlign: TextAlign.center,
                             ),
-                            TextFormField(
-                              obscureText: true,
-                              validator: (val) {
-                                return val.length > 6
-                                    ? null
-                                    : "Enter Password 6+ characters";
-                              },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have account? ",
                               style: simpleTextStyle(),
-                              controller: passwordEditingController,
-                              decoration: textFieldInputDecoration("password"),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                widget.toggleView();
+                              },
+                              child: Text(
+                                "Register now",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    decoration: TextDecoration.underline),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ForgotPassword()));
-                            },
-                            child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Text(
-                                  "Forgot Password?",
-                                  style: simpleTextStyle(),
-                                )),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          signIn();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.white
-                              ),
-                          width: MediaQuery.of(context).size.width,
-                          child: Text(
-                            "Login",
-                            
-                            style: TextStyle(color: Colors.black,fontSize: 20),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                    
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have account? ",
-                            style: simpleTextStyle(),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              widget.toggleView();
-                            },
-                            child: Text(
-                              "Register now",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  decoration: TextDecoration.underline),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
-                      )
-                    ],
+                        SizedBox(
+                          height: 50,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-          ),
-            floatingActionButton: Padding(
+            ),
+      floatingActionButton: Padding(
           padding: EdgeInsets.fromLTRB(20, 0, 0, 30),
           child: FloatingActionButton(
             onPressed: () {
-                widget.toggleView();
+              widget.toggleView();
             },
             child: Container(
               height: 60,
               width: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle, // circular shape
-                gradient: LinearGradient(
-                  colors: [Color.fromRGBO(25, 146, 155, 1), Colors.teal[900]],
-                ),
+                color: Colors.black,
               ),
               child: Icon(
                 Icons.add,
@@ -251,6 +254,5 @@ class _SignInState extends State<SignIn> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       // ),
     );
-    
   }
 }
