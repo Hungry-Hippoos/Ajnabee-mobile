@@ -21,12 +21,15 @@
  
 - ### Snapshots of the project :
 
+<div align="center">
+  
 ![img](screenshots/ss1.jpeg)
 ![img](screenshots/ss2.jpeg)  
 ![img](screenshots/ss3.jpeg)  
 ![img](screenshots/ss4.jpeg)  
 ![img](screenshots/ss5.jpeg)  
 
+</div>
 ---
 
 ### This is the repo for our mobile application Ajnabee 
