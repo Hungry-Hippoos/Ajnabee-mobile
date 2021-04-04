@@ -9,14 +9,23 @@ class OptionCard extends StatelessWidget {
 
   const OptionCard({this.optionText, this.selectedOptionCallback, this.radioButtonValue, this.groupValue});
 
-
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        optionText,
+    return Card(
+      color: Colors.white,
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
       ),
-      trailing: Radio(value: radioButtonValue, groupValue: groupValue, onChanged: selectedOptionCallback),
+      child: ListTile(
+        title: Text(
+          optionText,
+          style: TextStyle(
+            color: Color(0xff524e4d),
+          ),
+        ),
+        trailing: Radio(value: radioButtonValue, groupValue: groupValue, onChanged: selectedOptionCallback,activeColor: Color(0xffffc629),),
+      ),
     );
   }
 }

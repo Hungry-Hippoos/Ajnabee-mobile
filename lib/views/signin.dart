@@ -64,32 +64,17 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffffc629),
       appBar: AppBar(
-        backgroundColor: Color(0xff36B6C5),
-        title: Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Container(
-                height: 40,
-                width: 40,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          "assets/images/Applogo.png",
-                        )),
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "AJNABI!",
-              style: TextStyle(fontFamily: "Roboto", letterSpacing: 2.5),
-            )
-          ],
+        elevation: 0,
+        backgroundColor: Color(0xffffc629),
+        centerTitle: true,
+        title: Text('',style: TextStyle(
+          fontSize: 30.0,
+          letterSpacing: 2.5,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
         ),
       ),
       resizeToAvoidBottomInset: false,
@@ -100,24 +85,19 @@ class _SignInState extends State<SignIn> {
           : SafeArea(
               child: SingleChildScrollView(
                 child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/loginBack.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Center(
                     child: Column(
                       children: [
-                        SizedBox(height: 50.0),
-                        CircleAvatar(
-                          backgroundImage:
-                              AssetImage("assets/images/usergreen.jpg"),
-                          radius: 50,
-                        ),
+                        SizedBox(height: 40.0),
+                        Image.asset('assets/images/hippo.png'),
+                        Text('ajnabee',style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),),
                         SizedBox(
-                          height: 30,
+                          height: 50.0,
                         ),
                         Form(
                           key: formKey,
@@ -134,6 +114,9 @@ class _SignInState extends State<SignIn> {
                                 controller: emailEditingController,
                                 style: simpleTextStyle(),
                                 decoration: textFieldInputDecoration("email"),
+                              ),
+                              SizedBox(
+                                height: 10.0,
                               ),
                               TextFormField(
                                 obscureText: true,
@@ -167,10 +150,7 @@ class _SignInState extends State<SignIn> {
                               child: Container(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 8),
-                                  child: Text(
-                                    "Forgot Password?",
-                                    style: simpleTextStyle(),
-                                  )),
+                                  ),
                             )
                           ],
                         ),
@@ -182,8 +162,9 @@ class _SignInState extends State<SignIn> {
                             signIn();
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 16),
+                            padding: EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey, width: 2.0),
                                 borderRadius: BorderRadius.circular(30),
                                 color: Colors.white),
                             width: MediaQuery.of(context).size.width,
@@ -201,7 +182,7 @@ class _SignInState extends State<SignIn> {
                         SizedBox(
                           height: 16,
                         ),
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -215,7 +196,7 @@ class _SignInState extends State<SignIn> {
                               child: Text(
                                 "Register now",
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontSize: 16,
                                     decoration: TextDecoration.underline),
                               ),
@@ -231,28 +212,6 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
             ),
-      floatingActionButton: Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 0, 30),
-          child: FloatingActionButton(
-            onPressed: () {
-              widget.toggleView();
-            },
-            child: Container(
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle, // circular shape
-                color: Colors.black,
-              ),
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 50,
-              ),
-            ),
-          )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
-      // ),
     );
   }
 }

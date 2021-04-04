@@ -76,7 +76,7 @@ class _ChatState extends State<Chat> {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.yellow, width: 2),
+                  border: Border.all(color: Colors.white, width: 2),
                   shape: BoxShape.circle,
                   color: Colors.grey),
               child: Icon(
@@ -133,8 +133,8 @@ class _ChatState extends State<Chat> {
             ),
           ],
         ),
-        backgroundColor: Color(0xFF3B743B),
-        elevation: 0.0,
+        backgroundColor: Color(0xffffc629),
+        elevation: 1,
       ),
       body: Container(
         child: Stack(
@@ -174,7 +174,7 @@ class _ChatState extends State<Chat> {
                         contentPadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                         hintText: "Type a message",
                         hintStyle: TextStyle(
-                          color: Colors.black,
+                          color: Colors.black54,
                           fontSize: 20,
                         ),
                         border: InputBorder.none),
@@ -193,7 +193,7 @@ class _ChatState extends State<Chat> {
                 padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
                 child: Icon(
                   Icons.message,
-                  color: Colors.black,
+                  color: Color(0xffffc629),
                   size: 34,
                 ),
               ),
@@ -215,12 +215,12 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-          top: 8, bottom: 8, left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
+          top: 8, bottom: 8, left: sendByMe ? 0 : 15, right: sendByMe ? 15 : 0),
       alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin:
             sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
-        padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 10, bottom: 10, left: sendByMe ? 20 : 15, right: sendByMe ? 15 : 20),
         decoration: BoxDecoration(
           borderRadius: sendByMe
               ? BorderRadius.only(
@@ -231,12 +231,12 @@ class MessageTile extends StatelessWidget {
                   topLeft: Radius.circular(23),
                   topRight: Radius.circular(23),
                   bottomRight: Radius.circular(23)),
-          color: Colors.black,
+          color: Color(0xffffc629),
         ),
         child: Text(message,
             textAlign: TextAlign.start,
             style: TextStyle(
-                color: Colors.yellow,
+                color: Colors.black,
                 fontSize: 16,
                 fontFamily: 'OverpassRegular',
                 fontWeight: FontWeight.w400)),

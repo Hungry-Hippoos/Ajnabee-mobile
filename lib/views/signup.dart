@@ -59,32 +59,17 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffffc629),
       appBar: AppBar(
-        backgroundColor: Color(0xFF35629E),
-        title: Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Container(
-                height: 40,
-                width: 40,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          "assets/images/Applogo.png",
-                        )),
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "Discuss!",
-              style: TextStyle(fontFamily: "Roboto", letterSpacing: 2.5),
-            )
-          ],
+        elevation: 0,
+        backgroundColor: Color(0xffffc629),
+        centerTitle: true,
+        title: Text('',style: TextStyle(
+          fontSize: 30.0,
+          letterSpacing: 2.5,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
         ),
       ),
       resizeToAvoidBottomInset: false,
@@ -97,63 +82,64 @@ class _SignUpState extends State<SignUp> {
           : SafeArea(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: AssetImage("assets/images/signUpBack.jpg"),
-                    fit: BoxFit.cover,
-                  )),
+                  padding: EdgeInsets.all(40),
                   child: Column(
                     children: [
-                      SizedBox(height: 50.0),
-                      CircleAvatar(
-                        backgroundImage:
-                            AssetImage("assets/images/userlogo.jpg"),
-                        radius: 50.0,
+                      Image.asset('assets/images/hippo.png'),
+                      Text('ajnabee',style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                      SizedBox(
+                        height: 50.0,
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Form(
-                          key: formKey,
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                style: simpleTextStyle(),
-                                controller: usernameEditingController,
-                                validator: (val) {
-                                  return val.isEmpty || val.length < 3
-                                      ? "Enter Username 3+ characters"
-                                      : null;
-                                },
-                                decoration:
-                                    textFieldInputDecoration("username"),
-                              ),
-                              TextFormField(
-                                controller: emailEditingController,
-                                style: simpleTextStyle(),
-                                validator: (val) {
-                                  return RegExp(
-                                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                          .hasMatch(val)
-                                      ? null
-                                      : "Enter correct email";
-                                },
-                                decoration: textFieldInputDecoration("email"),
-                              ),
-                              TextFormField(
-                                obscureText: true,
-                                style: simpleTextStyle(),
-                                decoration:
-                                    textFieldInputDecoration("password"),
-                                controller: passwordEditingController,
-                                validator: (val) {
-                                  return val.length < 6
-                                      ? "Enter Password 6+ characters"
-                                      : null;
-                                },
-                              ),
-                            ],
-                          ),
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              style: simpleTextStyle(),
+                              controller: usernameEditingController,
+                              validator: (val) {
+                                return val.isEmpty || val.length < 3
+                                    ? "Enter Username 3+ characters"
+                                    : null;
+                              },
+                              decoration:
+                                  textFieldInputDecoration("username"),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            TextFormField(
+                              controller: emailEditingController,
+                              style: simpleTextStyle(),
+                              validator: (val) {
+                                return RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(val)
+                                    ? null
+                                    : "Enter correct email";
+                              },
+                              decoration: textFieldInputDecoration("email"),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            TextFormField(
+                              obscureText: true,
+                              style: simpleTextStyle(),
+                              decoration:
+                                  textFieldInputDecoration("password"),
+                              controller: passwordEditingController,
+                              validator: (val) {
+                                return val.length < 6
+                                    ? "Enter Password 6+ characters"
+                                    : null;
+                              },
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -164,25 +150,24 @@ class _SignUpState extends State<SignUp> {
                           singUp();
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey, width: 2.0),
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.white),
                           width: MediaQuery.of(context).size.width,
                           child: Text(
                             "Sign Up",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
+                            style:
+                            TextStyle(color: Colors.black, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 16,
+                        height: 32,
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -196,7 +181,7 @@ class _SignUpState extends State<SignUp> {
                             child: Text(
                               "SignIn now",
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 16,
                                   decoration: TextDecoration.underline),
                             ),

@@ -31,10 +31,27 @@ class _QuizPageState extends State<QuizPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
+                flex: 1,
+                child: Container(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    'Question ${quizBrain.getQuestionNumber() + 1}/10',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff2b2b2b),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 7,
                 child: Image.asset(
                     'assets/images/image${quizBrain.getQuestionNumber() + 1}.jpg'),
               ),
               Expanded(
+                flex: 10,
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -122,11 +139,11 @@ class _QuizPageState extends State<QuizPage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color(0xff21C38A),
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: Color(0xffffc629),
                   ),
-                  width: 150.0,
-                  height: 40.0,
+                  width: 200.0,
+                  height: 50.0,
                   padding: EdgeInsets.all(5.0),
                   child: Center(
                     child: Text(

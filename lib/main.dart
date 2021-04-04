@@ -2,6 +2,7 @@ import 'package:memechat/helper/authenticate.dart';
 import 'package:memechat/helper/helperfunctions.dart';
 import 'package:memechat/views/chatrooms.dart';
 import 'package:flutter/material.dart';
+import 'screens/quizwelcome.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,3 +44,5 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+

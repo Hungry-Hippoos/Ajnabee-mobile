@@ -16,7 +16,7 @@ class Chatopt extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30), color: Colors.white),
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

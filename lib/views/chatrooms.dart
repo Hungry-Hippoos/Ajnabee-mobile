@@ -26,18 +26,21 @@ class _ChatRoomState extends State<ChatRoom> {
       stream: chatRooms,
       builder: (context, snapshot) {
         return snapshot.hasData
-            ? ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) {
-                  return ChatRoomsTile(
-                    userName: snapshot.data.documents[index].data['chatRoomId']
-                        .toString()
-                        .replaceAll("_", "")
-                        .replaceAll(Constants.myName, ""),
-                    chatRoomId:
-                        snapshot.data.documents[index].data["chatRoomId"],
-                  );
-                })
+            ? Container(
+          padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 15.0),
+              child: ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (context, index) {
+                    return ChatRoomsTile(
+                      userName: snapshot.data.documents[index].data['chatRoomId']
+                          .toString()
+                          .replaceAll("_", "")
+                          .replaceAll(Constants.myName, ""),
+                      chatRoomId:
+                          snapshot.data.documents[index].data["chatRoomId"],
+                    );
+                  }),
+            )
             : Container();
       },
     );
@@ -63,19 +66,12 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Color(0xffffc629),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Row(
           children: <Widget>[
             Expanded(
-              flex: 6,
-              child: Text(
-                "Discuss!",
-                style: TextStyle(fontSize: 35, letterSpacing: 2.5),
-              ),
-            ),
-            Expanded(
-              flex: 2,
               child: (GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -83,12 +79,12 @@ class _ChatRoomState extends State<ChatRoom> {
                 },
                 child: Icon(
                   Icons.search,
+                  color: Color(0xff524e4d),
                   size: 33,
                 ),
               )),
             ),
             Expanded(
-              flex: 1,
               child: (GestureDetector(
                 onTap: () async {
                   final FirebaseUser user =
@@ -150,36 +146,32 @@ class _ChatRoomState extends State<ChatRoom> {
                 },
                 child: Icon(
                   Icons.refresh,
+                  color: Color(0xff524e4d),
                   size: 33,
                 ),
               )),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  AuthService().signOut();
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Authenticate()));
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Icon(Icons.exit_to_app,size: 33,color: Color(0xff524e4d)),
+                ),
+              ),
             )
           ],
         ),
-        backgroundColor: Color(0xFF33A7AF),
-        elevation: 0.0,
+        elevation: 2,
+        backgroundColor: Color(0xffffc629),
         centerTitle: false,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              AuthService().signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => Authenticate()));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.exit_to_app),
-            ),
-          )
-        ],
       ),
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/chatroomBg.jpg"),
-                fit: BoxFit.cover),
-          ),
           child: chatRoomsList(),
         ),
       ),

@@ -13,16 +13,27 @@ Widget appBarMain(BuildContext context) {
 
 InputDecoration textFieldInputDecoration(String hintText) {
   return InputDecoration(
-      hintText: hintText,
-      hintStyle: TextStyle(color: Colors.white54),
-      focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-      enabledBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)));
+    filled: true,
+    fillColor: Colors.white,
+    hintText: hintText,
+    contentPadding:
+    EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey, width: 2.0),
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey, width: 3.0),
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    ),);
 }
 
+
 TextStyle simpleTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 16);
+  return TextStyle(color: Colors.black, fontSize: 16);
 }
 
 TextStyle biggerTextStyle() {
