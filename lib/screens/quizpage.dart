@@ -109,13 +109,16 @@ class _QuizPageState extends State<QuizPage> {
                       };
 
                       http.Response response = await http.post(
-                          "https://e094513681ab.ngrok.io/rtest/api/rtest/all",
+                          "https://8cbf626c24fb.ngrok.io/rtest/api/rtest/all",
                           body: json.encode(abc),
                           headers: {"Content-Type": "application/json"});
                       print(json.encode(abc));
 
                       if (response.statusCode == 200) {
                         print(response.body);
+                        setState(() {
+                          quizBrain.reset();
+                        });
                       } else {
                         print("error");
                       }

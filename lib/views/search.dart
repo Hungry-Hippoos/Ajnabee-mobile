@@ -103,15 +103,16 @@ class _SearchState extends State<Search> {
         sendMessage(userName);
       },
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 15,
+              height: 25,
             ),
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Colors.orange.shade200),
+                  color: Color(0XFFFFC629)),
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -171,17 +172,18 @@ class _SearchState extends State<Search> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: Color(0XFF524e4d)),
+        // automaticallyImplyLeading: false,
         title: Row(
           children: [
             Expanded(
               flex: 7,
               child: TextField(
                 controller: searchEditingController,
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 24),
                 decoration: InputDecoration(
                     hintText: "Search...",
-                    hintStyle: TextStyle(color: Colors.white54),
+                    hintStyle: TextStyle(color: Color(0XFF524e4d)),
                     border: InputBorder.none),
               ),
             ),
@@ -197,13 +199,14 @@ class _SearchState extends State<Search> {
                 padding: EdgeInsets.all(12),
                 child: Icon(
                   Icons.search,
+                  color: Color(0XFF524e4d),
                   size: 30,
                 ),
               ),
             ),
           ],
         ),
-        backgroundColor: Color(0xFF33A7AF),
+        backgroundColor: Color(0XFFFFC629),
         elevation: 0.0,
       ),
       body: (isLoading
@@ -214,11 +217,6 @@ class _SearchState extends State<Search> {
             )
           : SafeArea(
               child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/chatroomBg.jpg"),
-                      fit: BoxFit.cover),
-                ),
                 child: SafeArea(
                   child: Container(
                     child: userList(),

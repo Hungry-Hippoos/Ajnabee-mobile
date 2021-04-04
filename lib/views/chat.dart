@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Chat extends StatefulWidget {
   final String chatRoomId;
@@ -114,13 +115,18 @@ class _ChatState extends State<Chat> {
                 dynamic request = {"data": list};
 
                 http.Response response = await http.post(
-                    "https://2c0275413087.ngrok.io/rtest/api/message",
+                    "https://8cbf626c24fb.ngrok.io/rtest/api/message",
                     body: json.encode(request),
                     headers: {"Content-Type": "application/json"});
                 print(json.encode(request));
 
                 if (response.statusCode == 200) {
                   print(response.body);
+                  Alert(
+                          context: context,
+                          title: "Chat Status",
+                          desc: json.decode(response.body)["Status"])
+                      .show();
                 } else {
                   print("error");
                 }
@@ -220,7 +226,11 @@ class MessageTile extends StatelessWidget {
       child: Container(
         margin:
             sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
-        padding: EdgeInsets.only(top: 10, bottom: 10, left: sendByMe ? 20 : 15, right: sendByMe ? 15 : 20),
+        padding: EdgeInsets.only(
+            top: 10,
+            bottom: 10,
+            left: sendByMe ? 20 : 15,
+            right: sendByMe ? 15 : 20),
         decoration: BoxDecoration(
           borderRadius: sendByMe
               ? BorderRadius.only(

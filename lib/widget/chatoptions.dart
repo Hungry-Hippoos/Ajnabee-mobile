@@ -15,7 +15,9 @@ class Chatopt extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30), color: Colors.white),
+                border: Border.all(color: Color(0XFFFFC629)),
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -32,15 +34,10 @@ class Chatopt extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 13,
-                 
-                      child:Text(
-                        name,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    
-                    
-                  
+                  child: Text(
+                    name,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 )
               ],
             ),
