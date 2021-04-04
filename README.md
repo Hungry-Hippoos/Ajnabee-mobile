@@ -31,8 +31,6 @@
 
 </div>
 
----
-#### This project was built under 24 hours
 
 ---
 
@@ -44,6 +42,9 @@
  #### Features to be added :
 - Guide to help people start a conversation, keep a conversation alive, icebreakers.
 - Video calling, voice calling features to be added.
+
+---
+#### This project was built under 24 hours
 
 ---
 <h3 align="center"><b>Developed with :heart: by <a href="https://github.com/mrpandya">Manan Pandya</a>, <a href="https://github.com/tusharsarkar3">Tushar Sarkar</a>, <a href="https://github.com/dhairya903">Dhairya Shah</a>, <a href="https://github.com/sanjeetnaik">Sanjeet Naik</a>.</b></h1>
