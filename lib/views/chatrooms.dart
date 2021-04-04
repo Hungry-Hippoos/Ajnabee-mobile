@@ -1,13 +1,17 @@
 import 'package:memechat/helper/authenticate.dart';
 import 'package:memechat/helper/constants.dart';
 import 'package:memechat/helper/helperfunctions.dart';
-import 'package:memechat/helper/theme.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:memechat/services/auth.dart';
 import 'package:memechat/services/database.dart';
 import 'package:memechat/views/chat.dart';
 import 'package:memechat/views/search.dart';
 import 'package:flutter/material.dart';
 import 'package:memechat/widget/chatoptions.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatRoom extends StatefulWidget {
   @override
@@ -64,13 +68,14 @@ class _ChatRoomState extends State<ChatRoom> {
         title: Row(
           children: <Widget>[
             Expanded(
-                flex: 7,
-                child: Text(
-                  "Discuss!",
-                  style: TextStyle(fontSize: 35, letterSpacing: 2.5),
-                )),
+              flex: 6,
+              child: Text(
+                "Discuss!",
+                style: TextStyle(fontSize: 35, letterSpacing: 2.5),
+              ),
+            ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: (GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -78,6 +83,73 @@ class _ChatRoomState extends State<ChatRoom> {
                 },
                 child: Icon(
                   Icons.search,
+                  size: 33,
+                ),
+              )),
+            ),
+            Expanded(
+              flex: 1,
+              child: (GestureDetector(
+                onTap: () async {
+                  final FirebaseUser user =
+                      await FirebaseAuth.instance.currentUser();
+                  final String uid = user.email;
+                  var temp2;
+
+                  var newuser;
+                  final userDoc = await Firestore.instance
+                      .collection('users')
+                      .where('userEmail', isEqualTo: uid)
+                      .limit(1)
+                      .getDocuments();
+
+                  if (userDoc.documents.length != 0) {
+                    newuser = userDoc.documents[0];
+                  }
+
+                  temp2 = newuser.data['userName'];
+
+                  print(temp2);
+
+                  http.Response response = await http.get(
+                    "https://2c0275413087.ngrok.io/rtest/api/rtest/$temp2",
+                  );
+
+                  var response_data;
+
+                  if (response.statusCode == 200) {
+                    response_data = json.decode(response.body);
+                    response_data = response_data["data"];
+                  } else {
+                    print("error");
+                  }
+
+                  var ls = [];
+
+                  for (int i = 0; i < response_data.length; i++) {
+                    ls.add(response_data[i]['username']);
+                  }
+                  Alert(
+                    context: context,
+                    type: AlertType.info,
+                    title: "MOST COMPATIBLE ",
+                    desc: "Usernames are : $ls",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "Got it !",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      )
+                    ],
+                  ).show();
+                  ;
+                  print(ls);
+                },
+                child: Icon(
+                  Icons.refresh,
                   size: 33,
                 ),
               )),
@@ -95,8 +167,9 @@ class _ChatRoomState extends State<ChatRoom> {
                   MaterialPageRoute(builder: (context) => Authenticate()));
             },
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.exit_to_app),
+            ),
           )
         ],
       ),

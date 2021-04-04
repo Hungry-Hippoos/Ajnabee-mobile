@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:memechat/helper/constants.dart';
 import 'package:memechat/services/database.dart';
-import 'package:memechat/widget/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';

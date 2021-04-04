@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'dart:async';
 
 class Search extends StatefulWidget {
   @override
@@ -18,9 +19,11 @@ class _SearchState extends State<Search> {
   DatabaseMethods databaseMethods = new DatabaseMethods();
   TextEditingController searchEditingController = new TextEditingController();
   QuerySnapshot searchResultSnapshot;
+  QuerySnapshot searchResultSnapshot1;
 
   bool isLoading = false;
   bool haveUserSearched = false;
+  // bool showagain = false;
 
   initiateSearch() async {
     if (searchEditingController.text.isNotEmpty) {
@@ -39,6 +42,24 @@ class _SearchState extends State<Search> {
       });
     }
   }
+
+  // searchmyusers(String name, int index) async {
+  //   print(name);
+  //   await databaseMethods.searchByName(name).then((snapshot) {
+  //     if (mounted) {
+  //       setState(() {
+  //         searchResultSnapshot1 = snapshot;
+  //       });
+  //     }
+  //   });
+  //   if (index == widget.ls.length - 1) {
+  //     if (mounted) {
+  //       setState(() {
+  //         showagain = false;
+  //       });
+  //     }
+  //   }
+  // }
 
   Widget userList() {
     return haveUserSearched
@@ -165,20 +186,21 @@ class _SearchState extends State<Search> {
               ),
             ),
             GestureDetector(
-                onTap: () {
-                  initiateSearch();
-                },
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(50)),
-                  padding: EdgeInsets.all(12),
-                  child: Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
-                ))
+              onTap: () {
+                initiateSearch();
+              },
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                padding: EdgeInsets.all(12),
+                child: Icon(
+                  Icons.search,
+                  size: 30,
+                ),
+              ),
+            ),
           ],
         ),
         backgroundColor: Color(0xFF33A7AF),
@@ -192,12 +214,17 @@ class _SearchState extends State<Search> {
             )
           : SafeArea(
               child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/chatroomBg.jpg"),
-                        fit: BoxFit.cover),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/chatroomBg.jpg"),
+                      fit: BoxFit.cover),
+                ),
+                child: SafeArea(
+                  child: Container(
+                    child: userList(),
                   ),
-                  child: SafeArea(child: Container(child: userList()))),
+                ),
+              ),
             )),
     );
   }
