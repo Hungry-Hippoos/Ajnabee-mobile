@@ -115,7 +115,7 @@ class _ChatState extends State<Chat> {
                 dynamic request = {"data": list};
 
                 http.Response response = await http.post(
-                    "https://8cbf626c24fb.ngrok.io/rtest/api/message",
+                    "https://48ecbb2b57e1.ngrok.io/rtest/api/message",
                     body: json.encode(request),
                     headers: {"Content-Type": "application/json"});
                 print(json.encode(request));

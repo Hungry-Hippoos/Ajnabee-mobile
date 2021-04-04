@@ -112,7 +112,7 @@ class _ChatRoomState extends State<ChatRoom> {
                     print(temp2);
 
                     http.Response response = await http.get(
-                      "https://8cbf626c24fb.ngrok.io/rtest/api/rtest/$temp2",
+                      "https://48ecbb2b57e1.ngrok.io/rtest/api/rtest/$temp2",
                     );
 
                     var response_data;
