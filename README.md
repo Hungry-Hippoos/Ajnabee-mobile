@@ -32,6 +32,9 @@
 </div>
 
 ---
+#### This project was built under 24 hours
+
+---
 
 ### This is the repo for our mobile application Ajnabee 
 #### The link to the repo of the server for our mobile application <a href="https://github.com/Hungry-Hippoos/Ajnabee">link :link:</a>
