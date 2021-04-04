@@ -30,6 +30,7 @@
 ![img](screenshots/ss5.jpeg)  
 
 </div>
+
 ---
 
 ### This is the repo for our mobile application Ajnabee 
