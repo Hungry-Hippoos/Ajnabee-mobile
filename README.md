@@ -35,7 +35,8 @@
 ---
 
 ### This is the repo for our mobile application Ajnabee 
-#### The link to the repo of the server for our mobile application <a href="https://github.com/Hungry-Hippoos/Ajnabee">link :link:</a>
+#### The link for the Ajnabee repository <a href="https://github.com/Hungry-Hippoos/Ajnabee">link :link:</a>
+#### The link to the repo of the server for our mobile application <a href="https://github.com/Hungry-Hippoos/Ajnabee-server">link :link:</a>
  
  ---
 
